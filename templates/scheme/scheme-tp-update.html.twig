@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        Сторінка оновлення схем трансформаторних пыдстанцій
+    </h1>
+    <div>
+        <form>
+            <label for="numberTpForUpdate">
+                Введіть номер підстанції для редагування
+            </label>
+            <input id="numberTpForUpdate" type="number" min="1" max="3000">
+            <input name="test" type="button" value="Ввод">
+        </form>
+    </div>
+    <div>
+        <h2>Adding a new product</h2>
+
+        {{ form_start(form) }}
+
+        {{ form_row(form.schemeTp) }}
+
+        <button type="submit">Save!</button>
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

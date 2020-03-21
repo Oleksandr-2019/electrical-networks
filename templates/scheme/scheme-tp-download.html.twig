@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        Сторінка схем трансформаторних пыдстанцій
+    </h1>
+    <div>
+        <h2>Adding a new product</h2>
+
+        {{ form_start(form) }}
+
+        {{ form_row(form.schemeTp) }}
+
+        {{ form_end(form) }}
+    </div>
+    <div>
+        {% if statementFact %}
+            <div>
+                Дана трансформаторна підстанція вже існує в базі даних
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

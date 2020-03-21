@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        Сторінка наявних схем трансформаторних підстанцій
+    </h1>
+    <ul class="existTp__list">
+        {% for dep in schemesTp %}
+            <li class="existTp__one-item">
+                <span class="existTp__one-item-left">
+                    <span class="existTp__number">
+                        ТП №{{ dep.getNumberTP() }}
+                    </span>
+                    <span>
+                        {{ dep.getDescriptionTP() }}
+                    </span>
+                </span>
+                <span class="existTp__one-item-right">
+                    <a class="link-button" href="{{ url('app_home') }}uploads/SchemesTp/{{ dep.schemeTpFilename }} " download>Скачать</a>
+                    <a class="link-button" href="{{ url('app_home') }}uploads/SchemesTp/{{ dep.schemeTpFilename }} ">Переглянуть</a>
+                    <a class="link-button" href="{{ url('app_home') }}scheme/tp/update/{{ dep.getNumberTP() }}">Редагувати</a>
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

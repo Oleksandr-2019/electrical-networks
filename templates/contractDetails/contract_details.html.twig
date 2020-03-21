@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        Сторінка деталей договорів
+    </h1>
+    <div>
+        {{ form_start(form) }}
+
+            {{ form_row(form.contractNumber) }}
+
+            {{ form_row(form.nameContract) }}
+
+            <ul class="classTelephoneNumbers" data-prototype="{{ form_row(form.telephoneNumbers.vars.prototype)|e('html_attr') }}">
+
+            </ul>
+
+            <button type="submit">Save!</button>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

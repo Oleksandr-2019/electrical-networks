@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        Сторінка пошуку договорів
+    </h1>
+    <div>
+        {{ form_start(form) }}
+
+        {{ form_row(form.contractNumber) }}
+
+        <button type="submit">Show!</button>
+
+        {{ form_end(form) }}
+    </div>
+
+
+
+    {% if showContractDetails == true %}
+        <div>
+            <span>
+                {{ showContractDetails.getContractNumber() }}
+            </span>
+            <span>
+                {{ showContractDetails.getNameContract() }}
+            </span>
+            <span>
+                <ul>
+                    {% for dep in showContractDetails.getTelephoneNumbers() %}
+                        <li>
+                            {{ dep }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </span>
+        </div>
+    {% endif %}
+
+
+{% endblock %}
