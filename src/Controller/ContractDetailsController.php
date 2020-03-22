@@ -4,12 +4,14 @@
 namespace App\Controller;
 
 use App\Entity\ContractDetails;
+use App\Repository\ContractDetailsRepository;
 use App\Form\ContractDetailsType;
 use App\Form\showContractDetailsType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * @Route("/contract_details")
@@ -25,7 +27,7 @@ class ContractDetailsController extends AbstractController
         $form = $this->createForm(showContractDetailsType::class, $contractDetails);
         $form->handleRequest($request);
 
-        //змінна яка бокує помилку Notice: Undefined variable: showContractDetails
+        //змінна яка блокує помилку Notice: Undefined variable: showContractDetails
         //при завантаженні сторінки коли ще запит не відправления
         $showContractDetails = false;
 
@@ -36,11 +38,34 @@ class ContractDetailsController extends AbstractController
             */
 
                     $entityManager = $this->getDoctrine()->getManager();
-                    $showContractDetails = $entityManager->getRepository(ContractDetails::class)->findOneBy(['contractNumber' => $contractDetails->getContractNumber()]);
+
+                    //перевірка якщо перше поле пусте то шукати по другому
+                    //якщо друге поле пусте то шукати по першому
+                    if ($contractDetails->getContractNumber() != null ) {
+                        $showContractDetails = $entityManager->getRepository(ContractDetails::class)->findOneBy(['contractNumber' => $contractDetails->getContractNumber()]);
+                        //var_dump($contractDetails->getContractNumber());
+                        var_dump('Номер');
+                    } else {
+
+                        //$showContractDetails = $entityManager->getRepository(ContractDetails::class)->findBy(['nameContract' => $contractDetails->getNameContract()]);
+                        // from inside a controller
+                        //$testName = 'Черкаський державний технологічний університет';
+                        $testName = 'Черкаський державний';
+
+                        $responseListContract = $this->getDoctrine()
+                            ->getRepository(ContractDetails::class)
+                            ->findAllContract($testName);
+
+                        var_dump('Назва');
+                        var_dump($responseListContract);
+
+
+                    }
+
                     //var_dump($showContractDetails);
                     //return $showContractDetails;
                 }
-        var_dump($showContractDetails);
+
         return $this->render('contractDetails/contract_details-show.html.twig', [
             'form' => $form->createView(),
             'showContractDetails' => $showContractDetails

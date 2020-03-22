@@ -19,6 +19,43 @@ class ContractDetailsRepository extends ServiceEntityRepository
         parent::__construct($registry, ContractDetails::class);
     }
 
+    /**
+     * @return ContractDetails[]
+     */
+    public function findAllContract($testNameContract): array
+    {
+
+
+
+        $qb = $this->createQueryBuilder('variableAllContractInBase')
+            ->having('variableAllContractInBase.nameContract = :testNameContract')
+            ->setParameter('testNameContract', $testNameContract)
+            ->orderBy('variableAllContractInBase.nameContract', 'ASC');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+
+
+
+
+/*
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT id
+            FROM App\Entity\ContractDetails
+            WHERE nameContract LIKE findNameContract '
+        )->setParameter('findNameContract', $findNameContract);
+
+        // returns an array of Product objects
+        return $query->getResult();
+*/
+
+
+
+    }
+
     // /**
     //  * @return ContractDetails[] Returns an array of ContractDetails objects
     //  */

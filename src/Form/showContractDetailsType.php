@@ -18,6 +18,11 @@ class showContractDetailsType extends AbstractType
         $builder
             ->add('contractNumber', NumberType::class, [
                 'label' => 'Номер договору',
+                'required' => false,
+            ])
+            ->add('nameContract', TextType::class,[
+                'label' => "Назва договору",
+                'required' => false,
             ])
 
 

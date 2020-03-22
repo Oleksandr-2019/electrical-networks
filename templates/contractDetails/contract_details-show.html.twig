@@ -19,13 +19,21 @@
 
     {% if showContractDetails == true %}
         <div>
-            <span>
-                {{ showContractDetails.getContractNumber() }}
-            </span>
-            <span>
-                {{ showContractDetails.getNameContract() }}
-            </span>
-            <span>
+            <div>
+                <span>
+                    Договір №
+                    {{ showContractDetails.getContractNumber() }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    {{ showContractDetails.getNameContract() }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    Перелік контактних номерів телефонів:
+                </span>
                 <ul>
                     {% for dep in showContractDetails.getTelephoneNumbers() %}
                         <li>
@@ -33,7 +41,7 @@
                         </li>
                     {% endfor %}
                 </ul>
-            </span>
+            </div>
         </div>
     {% endif %}
 
