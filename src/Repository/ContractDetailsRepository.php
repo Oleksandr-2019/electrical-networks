@@ -28,13 +28,28 @@ class ContractDetailsRepository extends ServiceEntityRepository
 
 
         $qb = $this->createQueryBuilder('variableAllContractInBase')
-            ->having('variableAllContractInBase.nameContract = :testNameContract')
-            ->setParameter('testNameContract', $testNameContract)
+            ->where('variableAllContractInBase.nameContract LIKE :testNameContract')
+            //->having('variableAllContractInBase.nameContract = :testNameContract')
+            ->setParameter('testNameContract', $testNameContract . '%')
+            //->setParameter('testNameContract', 'testNameContract%')
             ->orderBy('variableAllContractInBase.nameContract', 'ASC');
 
         $query = $qb->getQuery();
 
         return $query->execute();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
