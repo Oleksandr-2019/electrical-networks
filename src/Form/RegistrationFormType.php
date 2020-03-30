@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -19,6 +20,14 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('nickname', TextType::class)
+            ->add('roles', ChoiceType::class, [
+                'multiple' => true,
+                'choices' => [
+                    'Інспектор' => 'ROLE_INSPECTOR',
+                    'Спеціаліст договірного відділу' => 'ROLE_CONTRACT',
+
+                ],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

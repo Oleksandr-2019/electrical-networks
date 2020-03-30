@@ -153,3 +153,11 @@ body {
 .existTp__one-item-right a {
     margin: 0 10px;
 }
+
+
+/* for error page */
+
+.title-error {
+    margin-top: 100px;
+    text-align: center;
+}

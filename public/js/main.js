@@ -1,16 +1,36 @@
 'use strict';//може працювати і без строго режиму
 
 // створення кнопки "add_telephone_numbers_link"
-var $addTelephoneNumbersButton = $('<button type="button" class="add_telephone_numbers_link">Додати телефон</button>');
+var $addTelephoneNumbersButton = $('<button type="button" class="add_telephone_numbers_link btn btn-primary">Додати телефон</button>');
+
 var $newLinkLi = $('<li></li>').append($addTelephoneNumbersButton);
+
 var $numberClick = -1;
 
-
 jQuery(document).ready(function() {
+
+    //визначаєм останню цифру в id реальних номерів так як номери що плануються
+    //записувать мають бути більшими ніж останнній з уже існуючих
+    var $lostNumberElemTRealTelephone = $('fieldset.realTelNumbersWrap div').last().children().attr('id');
+    var lastIndex = $lostNumberElemTRealTelephone.lastIndexOf("_");       // позиция последнего пробела
+    $lostNumberElemTRealTelephone = $lostNumberElemTRealTelephone.substring($lostNumberElemTRealTelephone.length, lastIndex + 1)
+
+
+    //$lostNumberElemTRealTelephone = $lostNumberElemTRealTelephone.toString().slice(-1);
+    $lostNumberElemTRealTelephone = Number($lostNumberElemTRealTelephone);
+
+    console.log($lostNumberElemTRealTelephone);
+
+
+
+
+
+
 
     //визначаєм сторрінку оновлення
     //шляхом визначення чи існують вже якісь номери на сторінкі
     var $realTelNumbers = $('.realTelNumbersWrap');
+
     var $realTelNumbersLength = $realTelNumbers.find('div input').length;
     if ($realTelNumbersLength !== 0) {
         $numberClick = $realTelNumbersLength
@@ -30,13 +50,14 @@ jQuery(document).ready(function() {
     $addTelephoneNumbersButton.on('click', function(e) {
         // додає форму нового тегу (див. наступний блок коду)
         // тобто запускає функцію addTelephoneNumbersForm
-        console.log($numberClick = $numberClick + 1);
-
-
-        addTelephoneNumbersForm($collectionHolder, $newLinkLi, $numberClick);
+        $lostNumberElemTRealTelephone = $lostNumberElemTRealTelephone + 1;
+        console.log($lostNumberElemTRealTelephone);
+        addTelephoneNumbersForm($collectionHolder, $newLinkLi, $numberClick, $lostNumberElemTRealTelephone);
     });
 
-    function addTelephoneNumbersForm($collectionHolder, $newLinkLi, $numberClick) {
+
+
+    function addTelephoneNumbersForm($collectionHolder, $newLinkLi, $numberClick, $lostNumberElemTRealTelephone) {
 
         // Отримує пояснення-прототип даних раніше
         var prototype = $collectionHolder.data('prototype');
@@ -59,45 +80,29 @@ jQuery(document).ready(function() {
         // збільшити індекс на один для наступного пункту
         //$collectionHolder.data('index', index + 1);
 
-        // Відобразити форму на сторінці в лі, перед посиланням "Додати тег"
-        //var $newFormLi = $('<li></li>').append(newForm);
 
 
+        //newForm = newForm.replace(/contacts/g, $numberClick);
+        //Формування id ідентифікатора і name для input який буде добавлятись в список нових номерів
+        //що планується добавить
+        var $dynammicIdAndName = 'contract_details[telephoneNumbers][' + $lostNumberElemTRealTelephone + ']';
 
-        newForm = newForm.replace(/contacts/g, $numberClick);
+        $lostNumberElemTRealTelephone = $lostNumberElemTRealTelephone + 1;
 
+        //newForm =  $('<input type="text" id="5" name="contract_details[telephoneNumbers][5]" class="form-control">')
+        //<input type="text" id="5" name="contract_details[telephoneNumbers][5]" class="form-control">
+        //<input type="text" id="6" name="contract_details[telephoneNumbers]5]" class="form-control">
+        newForm =  $('<input type="text">')
+        newForm =  $(newForm).attr('id', $lostNumberElemTRealTelephone);
+        newForm =  $(newForm).attr('name', $dynammicIdAndName);
+        newForm =  $(newForm).attr('class', 'form-control');
+
+
+        // Додасть інпут для нового контакту, перед кнопкою "Додати телефон"
         var $newFormLi = $('<li></li>').append(newForm);
-        $newLinkLi.before($newFormLi);
 
+        $newLinkLi.before($newFormLi);
 
     }
 
 });
-
-
-
-// Пока браузеры еще не договорились.. заботимся об этом сами!
-var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
-
-console.log("Cтатус зарядки батареи: ", battery.charging); // true
-console.log("Уровень зарядки батареи: ", battery.level); // 0.58
-console.log("Осталось времени: ", battery.dischargingTime); // 600
-
-battery.addEventListener("chargingchange", function(e) {
-    console.log("Изменен статус зарядки батареи: ", battery.charging);
-}, false);
-battery.addEventListener("chargingtimechange", function(e) {
-    console.log("Изменено время до конца зарядки: ", battery.chargingTime);
-}, false);
-battery.addEventListener("dischargingtimechange", function(e) {
-    console.log("Изменено время оставшееся до разрядки: ", battery.dischargingTime);
-}, false);
-battery.addEventListener("levelchange", function(e) {
-    console.log("Изменен уровень зарядки: ", battery.level);
-}, false);
-
-
-
-
-
-

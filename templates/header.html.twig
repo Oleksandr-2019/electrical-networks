@@ -1,0 +1,37 @@
+<header class="header-main-wrapper">
+    <div class="header-main">
+        <div class="header-main__logo">
+            <img src="{{ asset('uploads/image/logo.png') }}" alt="logotype">
+        </div>
+        <nav class="navigation-main">
+            <ul class="navigation-main__list">
+                <li>
+                    <a href="{{ path("app_home") }}">
+                        Головна
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path("show_scheme_tp") }}">
+                        Схеми ТП
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path("show_contract_details") }}">
+                        Деталі договорів
+                    </a>
+                </li>
+                <li>
+                    {% if statusAuthorization %}
+                        <a href="{{ path("app_logout") }}">
+                            Вийти
+                        </a>
+                    {% elseif statusAuthorization == false %}
+                        <a href="{{ path("app_login") }}">
+                            Увійти
+                        </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

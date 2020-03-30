@@ -36,3 +36,13 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+     - { path:  /register, roles: ROLE_ADMIN }
+     - { path:  /contract_details/show, roles: IS_AUTHENTICATED_FULLY }
+     - { path:  /contract_details/update, roles: ROLE_CONTRACT }
+     - { path:  /contract_details/new, roles: ROLE_CONTRACT }
+     - { path:  /scheme/tp/new, roles: ROLE_CONTRACT }
+     - { path:  /scheme/tp/update, roles: ROLE_CONTRACT }
+     - { path:  /scheme/tp/show, roles: IS_AUTHENTICATED_FULLY }
+
+
+

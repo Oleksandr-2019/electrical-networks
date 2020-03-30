@@ -29,7 +29,7 @@ class ContractDetailsType extends AbstractType
                 'allow_add' => true,//дає можливість добавлять нові номери вже до існуючих
                 'prototype' => true,
                 'prototype_data' => false,//Placeholder для поля полів додавання нових номерів
-                'prototype_name' => 'contacts',//тільки з цим запрацювала можливість добавлять нові номери вже до існуючих - contacts в цьому може бути будьяким іншим словом
+                'prototype_name' => 'contacts',//тільки з цим запрацювала можливість добавлять нові номери вже до існуючих так як слово contacts використовується в коді jquery - contacts в цьому може бути будьяким іншим словом
                 'entry_options' => [
                     'label' =>  false,//якщо задать якусь строку то вона зявиться біля кожного поля input
                 ],
