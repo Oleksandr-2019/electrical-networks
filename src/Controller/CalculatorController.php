@@ -50,7 +50,7 @@ class CalculatorController extends AbstractController
         ],
     ];
 
-    private function calc(int $type, int $number): double
+    private function calc(int $type, int $number): float
     {
         $key1 = 0;
         $value1 = 0;
@@ -106,7 +106,7 @@ class CalculatorController extends AbstractController
             $number = $form->getData()['number'];
 
             $result = $this->calc($type, $number);
-            
+
             return $this->render('calculator/result.html.twig', [
                 'form' => $form->createView(),
                 'result' => $result,
