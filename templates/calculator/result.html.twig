@@ -1,0 +1,7 @@
+{% extends 'calculator/index.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <h3>Питоме розрахункове електричне навантаження житла = {{ result }}</h3>
+    <h3>- всього будинку = {{ result * number }}</h3>
+{% endblock %}
