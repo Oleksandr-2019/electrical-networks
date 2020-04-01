@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Range;
 
 class CalculatorController extends AbstractController
 {
@@ -95,7 +96,15 @@ class CalculatorController extends AbstractController
                 },
                 'label' => 'Виберіть вид житла:',
             ])
-            ->add('number', IntegerType::class, ['label' => 'Кількість жител:'])
+            ->add('number', IntegerType::class, [
+                'constraints' => [new Range([
+                    'min' => 1,
+                    'max' => 1000,
+                    'minMessage' => 'Це число повинно бути не менше 1',
+                    'maxMessage' => 'Це число повинно бути не більше 1000',
+                ])],
+                'label' => 'Кількість жител:'
+            ])
             ->add('save', SubmitType::class, ['label' => 'Порахувати'])
             ->getForm();
 
