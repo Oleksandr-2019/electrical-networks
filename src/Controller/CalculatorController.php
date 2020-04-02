@@ -51,7 +51,7 @@ class CalculatorController extends AbstractController
         ],
     ];
 
-    private $types = [
+    private $electrificationTypes = [
         11 => '1.1 І рівня електрифікації - в будинках з плитами на природному газі',
         12 => '1.2 ІІ рівня електрифікації - в будинках з плитами на скрапленому газі та на твердому паливі',
         13 => '1.3 ІІІ рівня електрифікації - в будинках з електроплитами потужністю до 8,5 кВт вкл.',
@@ -89,13 +89,13 @@ class CalculatorController extends AbstractController
         $form = $this->createFormBuilder()
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    $this->types[11] => 11,
-                    $this->types[12] => 12,
-                    $this->types[13] => 13,
-                    $this->types[14] => 14,
-                    $this->types[15] => 15,
-                    $this->types[21] => 21,
-                    $this->types[22] => 22,
+                    $this->electrificationTypes[11] => 11,
+                    $this->electrificationTypes[12] => 12,
+                    $this->electrificationTypes[13] => 13,
+                    $this->electrificationTypes[14] => 14,
+                    $this->electrificationTypes[15] => 15,
+                    $this->electrificationTypes[21] => 21,
+                    $this->electrificationTypes[22] => 22,
                 ],
                 'group_by' => function($choice, $key, $value) {
                     if ($value < 20) {
@@ -124,7 +124,7 @@ class CalculatorController extends AbstractController
             $type = $form->getData()['type'];
             $number = $form->getData()['number'];
 
-            $result = $this->calc($type, $number);
+            $result = round($this->calc($type, $number), 3);
 
             return $this->render('calculator/result.html.twig', [
                 'form' => $form->createView(),
