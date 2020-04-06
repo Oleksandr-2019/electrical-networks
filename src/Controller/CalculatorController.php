@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Range;
 
 class CalculatorController extends AbstractController
 {
@@ -50,6 +51,16 @@ class CalculatorController extends AbstractController
         ],
     ];
 
+    private $electrificationTypes = [
+        11 => '1.1 І рівня електрифікації - в будинках з плитами на природному газі',
+        12 => '1.2 ІІ рівня електрифікації - в будинках з плитами на скрапленому газі та на твердому паливі',
+        13 => '1.3 ІІІ рівня електрифікації - в будинках з електроплитами потужністю до 8,5 кВт вкл.',
+        14 => '1.4 ІV рівня електрифікації - в будинках з електроплитами потужністю до 10,5 кВт вкл.',
+        15 => '1.5 V рівня електрифікації - в будиночках на ділянках садівничих товариств',
+        21 => '2.1 І рівня електрифікації - в будинках з плитами на природному газі',
+        22 => '2.2 ІІ рівня електрифікації - в будинках з електроплитами потужністю до 10,5 кВт вкл.',
+    ];
+
     private function calc(int $type, int $number): float
     {
         $key1 = 0;
@@ -78,13 +89,13 @@ class CalculatorController extends AbstractController
         $form = $this->createFormBuilder()
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    '1.1 І рівня електрифікації - в будинках з плитами на природному газі' => 11,
-                    '1.2 ІІ рівня електрифікації - в будинках з плитами на скрапленому газі та на твердому паливі' => 12,
-                    '1.3 ІІІ рівня електрифікації - в будинках з електроплитами потужністю до 8,5 кВт вкл.' => 13,
-                    '1.4 ІV рівня електрифікації - в будинках з електроплитами потужністю до 10,5 кВт вкл.' => 14,
-                    '1.5 V рівня електрифікації - в будиночках на ділянках садівничих товариств' => 15,
-                    '2.1 І рівня електрифікації - в будинках з плитами на природному газі' => 21,
-                    '2.2 ІІ рівня електрифікації - в будинках з електроплитами потужністю до 10,5 кВт вкл.' => 22,
+                    $this->electrificationTypes[11] => 11,
+                    $this->electrificationTypes[12] => 12,
+                    $this->electrificationTypes[13] => 13,
+                    $this->electrificationTypes[14] => 14,
+                    $this->electrificationTypes[15] => 15,
+                    $this->electrificationTypes[21] => 21,
+                    $this->electrificationTypes[22] => 22,
                 ],
                 'group_by' => function($choice, $key, $value) {
                     if ($value < 20) {
@@ -95,7 +106,15 @@ class CalculatorController extends AbstractController
                 },
                 'label' => 'Виберіть вид житла:',
             ])
-            ->add('number', IntegerType::class, ['label' => 'Кількість жител:'])
+            ->add('number', IntegerType::class, [
+                'constraints' => [new Range([
+                    'min' => 1,
+                    'max' => 1000,
+                    'minMessage' => 'Це число повинно бути не менше 1',
+                    'maxMessage' => 'Це число повинно бути не більше 1000',
+                ])],
+                'label' => 'Кількість жител:'
+            ])
             ->add('save', SubmitType::class, ['label' => 'Порахувати'])
             ->getForm();
 
@@ -105,7 +124,7 @@ class CalculatorController extends AbstractController
             $type = $form->getData()['type'];
             $number = $form->getData()['number'];
 
-            $result = $this->calc($type, $number);
+            $result = round($this->calc($type, $number), 3);
 
             return $this->render('calculator/result.html.twig', [
                 'form' => $form->createView(),
