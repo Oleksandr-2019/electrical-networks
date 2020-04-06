@@ -117,7 +117,7 @@ jQuery(document).ready(function() {
         $('.navigation-main').slideToggle( "slow" );
     })
     var width_browser = $( window ).width();
-    if (width_browser < 1000) {
+    if (width_browser < 992) {
         $('.navigation-main').hide();
     } else {
         $('.navigation-main').show();
@@ -128,7 +128,7 @@ jQuery(document).ready(function() {
         $('.hamburger-menu__line-2').removeClass('hamburger-menu__line--hidden');
         $('.hamburger-menu__line-1').removeClass('hamburger-menu__line-1--open');
         $('.hamburger-menu__line-3').removeClass('hamburger-menu__line-3--open');
-        if (width_browser < 1000) {
+        if (width_browser < 992) {
             $('.navigation-main').hide();
         } else {
             $('.navigation-main').show();

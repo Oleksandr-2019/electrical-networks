@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ApiToken;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
@@ -19,12 +20,15 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
+        // 1) Будівництво форми
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
+
+        // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // 3) Створення пароля (you could also do this via Doctrine listener)
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -32,8 +36,12 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // 4) Створення токена
+            $apiToken = new ApiToken($user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+            $entityManager->persist($apiToken);
             $entityManager->flush();
 
             // do anything else you need here, like send an email

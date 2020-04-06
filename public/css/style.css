@@ -24,7 +24,7 @@
     margin-left: 20px;
 }
 
-@media all and (max-width: 1000px) {
+@media all and (max-width: 768px) {
     .navigation-main__list {
         display: block;
     }
@@ -156,7 +156,7 @@ body {
     align-items: center;
 }
 
-@media all and (min-width: 1000px) {
+@media all and (min-width: 992px) {
     .hamburger-menu-wrapper {
         display: none;
     }
@@ -200,7 +200,7 @@ body {
 
 }
 
-@media all and (max-width: 1000px) {
+@media all and (max-width: 992px) {
 
     .header-main {
         display: block;
