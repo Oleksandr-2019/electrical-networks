@@ -1,7 +1,18 @@
 <header class="header-main-wrapper">
     <div class="header-main">
-        <div class="header-main__logo">
-            <img src="{{ asset('uploads/image/logo.png') }}" alt="logotype">
+        <div class="logotype-hamburger-menu">
+            <div class="header-main__logo">
+                <a href="{{ path("app_home") }}">
+                    <img src="{{ asset('uploads/image/logo.png') }}" alt="logotype">
+                </a>
+            </div>
+            <div class="hamburger-menu-wrapper">
+                <div class="hamburger-menu">
+                    <div class="hamburger-menu__line-1"></div>
+                    <div class="hamburger-menu__line-2"></div>
+                    <div class="hamburger-menu__line-3"></div>
+                </div>
+            </div>
         </div>
         <nav class="navigation-main">
             <ul class="navigation-main__list">
@@ -13,6 +24,11 @@
                 <li>
                     <a href="{{ path("show_scheme_tp") }}">
                         Схеми ТП
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path("show_contract_details") }}">
+                        Деталі договорів
                     </a>
                 </li>
                 <li>

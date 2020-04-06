@@ -1,0 +1,26 @@
+
+/* for scheme-tp-show */
+
+.existTp__one-item {
+    margin: 20px;
+}
+
+.existTp__number {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.existTp__one-item-right a {
+    margin: 0 10px;
+}
+
+.existTp__one-item-left {
+    display: flex;
+}
+
+@media all and (min-width: 768px) {
+    .existTp__one-item {
+        display: flex;
+        justify-content: space-between;
+    }
+}

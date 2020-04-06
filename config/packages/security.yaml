@@ -43,6 +43,7 @@ security:
      - { path:  /scheme/tp/new, roles: ROLE_CONTRACT }
      - { path:  /scheme/tp/update, roles: ROLE_CONTRACT }
      - { path:  /scheme/tp/show, roles: IS_AUTHENTICATED_FULLY }
+     - { path:  /calculator, roles: IS_AUTHENTICATED_FULLY }
 
 
 

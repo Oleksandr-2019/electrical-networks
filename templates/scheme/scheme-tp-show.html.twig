@@ -19,7 +19,9 @@
                 <span class="existTp__one-item-right">
                     <a class="link-button" href="{{ url('app_home') }}uploads/SchemesTp/{{ dep.schemeTpFilename }} " download>Скачать</a>
                     <a class="link-button" href="{{ url('app_home') }}uploads/SchemesTp/{{ dep.schemeTpFilename }} ">Переглянуть</a>
-                    <a class="link-button" href="{{ url('app_home') }}scheme/tp/update/{{ dep.getNumberTP() }}">Редагувати</a>
+                    {% if is_granted('ROLE_CONTRACT') %}
+                        <a class="link-button" href="{{ url('app_home') }}scheme/tp/update/{{ dep.getNumberTP() }}">Редагувати</a>
+                    {% endif %}
                 </span>
             </li>
         {% endfor %}

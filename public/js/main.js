@@ -106,3 +106,34 @@ jQuery(document).ready(function() {
     }
 
 });
+
+
+jQuery(document).ready(function() {
+    var buttonMenu = $('.hamburger-menu');
+    buttonMenu.on('click', function() {
+        $('.hamburger-menu__line-2').toggleClass('hamburger-menu__line--hidden');
+        $('.hamburger-menu__line-1').toggleClass('hamburger-menu__line-1--open');
+        $('.hamburger-menu__line-3').toggleClass('hamburger-menu__line-3--open');
+        $('.navigation-main').slideToggle( "slow" );
+    })
+    var width_browser = $( window ).width();
+    if (width_browser < 1000) {
+        $('.navigation-main').hide();
+    } else {
+        $('.navigation-main').show();
+    }
+    $(window).resize(function() {
+
+        var width_browser = $( window ).width();
+        $('.hamburger-menu__line-2').removeClass('hamburger-menu__line--hidden');
+        $('.hamburger-menu__line-1').removeClass('hamburger-menu__line-1--open');
+        $('.hamburger-menu__line-3').removeClass('hamburger-menu__line-3--open');
+        if (width_browser < 1000) {
+            $('.navigation-main').hide();
+        } else {
+            $('.navigation-main').show();
+        }
+
+
+    });
+})
