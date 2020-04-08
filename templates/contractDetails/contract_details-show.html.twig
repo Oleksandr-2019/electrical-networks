@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="contract-details">
-        <a class="link-button" href="{{ path("new_contract_details") }}">
-            Створити новий договір
-        </a>
-    </div>
+    {% if is_granted('ROLE_CONTRACT') %}
+        <div class="contract-details">
+            <a class="link-button" href="{{ path("new_contract_details") }}">
+                Створити новий договір
+            </a>
+        </div>
+    {% endif %}
+
     <h1>
         Сторінка пошуку договорів
     </h1>

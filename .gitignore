@@ -17,3 +17,12 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+### add IDEA for ignore
+
+.idea
+/idea
+
+### add .gitignore for ignore
+
+### .gitignore

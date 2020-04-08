@@ -131,6 +131,8 @@ body {
 .link-button:hover {
     background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
     background-color:#f24437;
+    color: #ffffff;
+    text-decoration: none;
 }
 .link-button:active {
     position:relative;
