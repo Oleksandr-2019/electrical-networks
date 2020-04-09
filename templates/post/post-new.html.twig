@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>
+        Сторінка додавання оголошення
+    </h1>
+    <div>
+
+        {{ form_start(form) }}
+
+        {{ form_row(form.textPost) }}
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
