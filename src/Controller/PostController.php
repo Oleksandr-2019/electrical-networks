@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/ContractDetailsController.php
 namespace App\Controller;
 
 use App\Entity\Post;
@@ -39,17 +38,14 @@ class PostController extends AbstractController
 
         //Записуєм пост
         $myNewPost = new Post();
+        //Записуєм поточного користувача в екземпляр поста
+        $myNewPost->setUser($currentUser)
+            ->setDateCreationPost(new \DateTime('now'));
 
-        $entityManager = $this->getDoctrine()->getManager();
         $formPost = $this->createForm(PostType::class, $myNewPost);
         $formPost->handleRequest($request);
 
         if ($formPost->isSubmitted() && $formPost->isValid() ) {
-            $entityManager = $this->getDoctrine()->getManager();
-            //Записуєм поточного користувача в екземпляр поста
-            $myNewPost->setUser($currentUser);
-            //Записуєм пост в базу даних
-            $entityManager->persist($myNewPost);
             //Отримуєм назву файла картинки для зміни її назви в майбутньому
             $postTpFileFile = $formPost['nameMainImagePost']->getData();
             // ця умова необхідна, оскільки поле "schemeTp" не обов'язкове
@@ -71,19 +67,15 @@ class PostController extends AbstractController
                     // ...обробляти виняток, якщо щось відбувається під час завантаження файлу
                 }
 
-
                 // оновлює властивість 'brochureFilename' для зберігання імені файлу PDF
                 // замість її змісту
-
                 $myNewPost->setNameMainImagePost($newFilename);
-
-
-                // Запис даних в базу даних (не обовязково для запису сомого файлу на сервер)
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($myNewPost);
-                $entityManager->flush();
-
             }
+
+            // Запис даних в базу даних (не обовязково для запису сомого файлу на сервер)
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($myNewPost);
+            $entityManager->flush();
 
             return $this->redirect($this->generateUrl('app_home'));
         }
