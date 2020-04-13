@@ -49,14 +49,14 @@ class Post
      * @ORM\COLUMN(type="string", unique=true)
      */
     private $nameMainImagePost;
-/*
-    /**
-     * @var DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime", unique=true)
-     */
 
- //   private $dateCreationPost;
+    /**
+     * @var \DateTime
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreationPost;
 
 
 
@@ -117,19 +117,25 @@ class Post
 
         return $this;
     }
-/*
-    public function getDateCreationPost(): ?\DateTimeInterface
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCreationPost(): ?\DateTime
     {
         return $this->dateCreationPost;
     }
 
-    public function setDateCreationPost(?\DateTimeInterface $dateCreationPost)
+    /**
+     * @param \DateTime $dateCreationPost
+     * @return $this
+     */
+    public function setDateCreationPost(\DateTime $dateCreationPost): self
     {
         $this->dateCreationPost = $dateCreationPost;
 
         return $this;
     }
-*/
 
 
 

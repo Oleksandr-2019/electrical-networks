@@ -25,6 +25,9 @@
                     <span>
                         Автор: {{ onePost.user.nickname }}
                     </span>
+                    <span>
+                        {{ onePost.dateCreationPost ? onePost.dateCreationPost|date('d-m-Y h:i:s') : '' }}
+                    </span>
                     <a class="read-more" href="{{ url('app_home') }}post/detailed/{{ onePost.slug }}">
                         Читати повністю
                     </a>

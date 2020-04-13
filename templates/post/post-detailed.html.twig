@@ -15,6 +15,9 @@
     <span class="post-detailed__authos">
         {{ post.user.nickname }}
     </span>
+    <span class="post-detailed__date-creation">
+        {{ post.dateCreationPost ? post.dateCreationPost|date('d-m-Y h:i:s') : '' }}
+    </span>
 </div>
 
 {% endblock %}
