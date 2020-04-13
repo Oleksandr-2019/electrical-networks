@@ -7,6 +7,9 @@
 
 .small-post__image {
     margin-right: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .small-post__image,
