@@ -6,5 +6,31 @@
     <h1>
         Головна сторінка
     </h1>
+    <section>
+        {% for onePost in listOutputPost %}
+            <article class="small-post">
+                <h2 class="small-post__title">
+                    {{ onePost.titlePost }}
+                </h2>
+                <div class="small-post__content">
+                    <div class="small-post__image" style="background-image: url({{ url('app_home') }}uploads/Post/{{ onePost.nameMainImagePost }}); ">
+
+                    </div>
+                    <p class="small-post__text">
+
+                        {{ onePost.textPost[0:255] }}...
+                    </p>
+                </div>
+                <div class="small-post__bottom-part">
+                    <span>
+                        Автор: {{ onePost.user.nickname }}
+                    </span>
+                    <a class="read-more" href="{{ url('app_home') }}post/detailed/{{ onePost.slug }}">
+                        Читати повністю
+                    </a>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
 
 {% endblock %}

@@ -7,11 +7,15 @@
     </h1>
     <div>
 
-        {{ form_start(form) }}
+        {{ form_start(formPost) }}
 
-        {{ form_row(form.textPost) }}
+        {{ form_row(formPost.titlePost) }}
 
-        {{ form_end(form) }}
+        {{ form_row(formPost.nameMainImagePost) }}
+
+        {{ form_row(formPost.textPost) }}
+
+        {{ form_end(formPost) }}
     </div>
 
 {% endblock %}

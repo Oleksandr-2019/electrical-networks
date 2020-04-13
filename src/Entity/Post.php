@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  */
@@ -24,12 +25,18 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=400, unique=true)
+     * @ORM\Column(type="string", unique=true)
      */
     private $titlePost;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @Gedmo\Slug(fields={"titlePost"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="text")
      */
     private $textPost;
 
@@ -39,16 +46,17 @@ class Post
     }
 
     /**
-     * @ORM\COLUMN(type="string")
+     * @ORM\COLUMN(type="string", unique=true)
      */
     private $nameMainImagePost;
-
+/*
     /**
      * @var DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", unique=true)
      */
-    private $dateCreationPost;
+
+ //   private $dateCreationPost;
 
 
 
@@ -68,9 +76,21 @@ class Post
         return $this->titlePost;
     }
 
-    public function setTitlePost(string $titlePost): ?string
+    public function setTitlePost(string $titlePost):  self
     {
         $this->titlePost = $titlePost;
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
         return $this;
     }
 
@@ -97,7 +117,7 @@ class Post
 
         return $this;
     }
-
+/*
     public function getDateCreationPost(): ?\DateTimeInterface
     {
         return $this->dateCreationPost;
@@ -109,7 +129,7 @@ class Post
 
         return $this;
     }
-
+*/
 
 
 

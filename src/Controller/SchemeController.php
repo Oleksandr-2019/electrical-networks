@@ -35,6 +35,7 @@ class SchemeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $schemeTpFile */
+            //Отримуєм назву файла картинки для зміни її назви в майбутньому
             $schemeTpFile = $form['schemeTp']->getData();
             $numberTPString = $form['numberTP']->getData();
 

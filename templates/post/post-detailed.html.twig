@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="post-detailed">
+    <h1 class="post-detailed__title">
+        {{ post.titlePost }}
+    </h1>
+    <div class="post-detailed__main-image" style="background-image: url({{ url('app_home') }}uploads/Post/{{ post.nameMainImagePost }}); ">
+
+    </div>
+    <p class="post-detailed__text">
+        {{ post.textPost }}
+    </p>
+    <span class="post-detailed__authos">
+        {{ post.user.nickname }}
+    </span>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+/* small-post__content */
+
+.small-post__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-post__image {
+    margin-right: 30px;
+}
+
+.small-post__image,
+.small-post__text {
+    width: 50%;
+    height: 400px;
+}
+
+.small-post__bottom-part {
+    display: flex;
+    justify-content: space-between;
+}

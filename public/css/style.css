@@ -1,4 +1,6 @@
 @import "/css/scheme.css";
+@import "/css/home.css";
+@import "/css/post.css";
 /* header  */
 
 .header-main {
@@ -212,4 +214,27 @@ body {
 
 .navigation-main .navigation-main__list--mobile {
     display: block;
+}
+
+/* base */
+
+.read-more {
+    border-radius: 0.3rem;
+    border-color: #007bff;
+    background-color: #007bff;
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.read-more:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    text-decoration: none;
 }
