@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-
     <h1>
         Головна сторінка
     </h1>
@@ -14,10 +12,8 @@
                 </h2>
                 <div class="small-post__content">
                     <div class="small-post__image" style="background-image: url({{ url('app_home') }}uploads/Post/{{ onePost.nameMainImagePost }}); ">
-
                     </div>
                     <p class="small-post__text">
-
                         {{ onePost.textPost[0:255] }}...
                     </p>
                 </div>
@@ -34,6 +30,10 @@
                 </div>
             </article>
         {% endfor %}
+
+        <div class="navigation">
+            {{ knp_pagination_render(listOutputPost) }}
+        </div>
     </section>
 
 {% endblock %}

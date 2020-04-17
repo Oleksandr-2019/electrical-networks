@@ -1,8 +1,8 @@
 <?php
 
+
 namespace App\Entity;
 
-use DateTime;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -40,11 +40,6 @@ class Post
      */
     private $textPost;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     /**
      * @ORM\COLUMN(type="string", unique=true)
      */
@@ -58,18 +53,21 @@ class Post
      */
     private $dateCreationPost;
 
-
-
-
-
-
-
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
+     */
+    private $user;
 
 
 
     /*
      *  Getter and Setter
      */
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getTitlePost(): ?string
     {
@@ -137,14 +135,6 @@ class Post
         return $this;
     }
 
-
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
-     */
-    private $user;
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -156,6 +146,4 @@ class Post
 
         return $this;
     }
-
-
 }

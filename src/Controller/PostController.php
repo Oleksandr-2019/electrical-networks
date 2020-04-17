@@ -26,13 +26,11 @@ use Symfony\Component\Filesystem\Filesystem;//для роботи з файла�
  */
 class PostController extends AbstractController
 {
-
     /**
      * @Route("/new", name="post_new")
      */
     public function postNew (Request $request): Response
     {
-
         //Визначаєм користувача який зайшов на сторінку для його запису в таблицю поста
         $currentUser= $this->getUser();
 
@@ -80,11 +78,9 @@ class PostController extends AbstractController
             return $this->redirect($this->generateUrl('app_home'));
         }
 
-
         return $this->render('post/post-new.html.twig', [
             'formPost' => $formPost->createView(),
         ]);
-
     }
 
     /**
@@ -94,7 +90,6 @@ class PostController extends AbstractController
      * @return Response
      * @ParamConverter("post", options={"mapping" : {"postSlug" : "slug"}})
      */
-
     public function postDetailed (Post $post, Request $request): Response
     {
         return $this->render('post/post-detailed.html.twig', [
